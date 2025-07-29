@@ -1,2 +1,2 @@
 # ShopUp
-Repository for the ShopApp Spring Project
+Repository for the ShopUp Spring Project
