@@ -82,7 +82,7 @@ const Home = () => {
                     marginBottom: "5px",
                   }}
                 >
-                  <i className="bi bi-currency-rupee"></i>
+                  <i className="bi bi-currency-euro"></i>
                   {product.price}
                 </h5>
               </div>
