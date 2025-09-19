@@ -3,6 +3,7 @@ package com.mmolnar.ShopUp2.controller
 import com.mmolnar.ShopUp2.model.Product
 import com.mmolnar.ShopUp2.service.ProductService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -21,13 +22,23 @@ class ProductController {
     lateinit var productService: ProductService
 
     @GetMapping("/products")
-    fun getProductsList(): List<Product> {
-        return productService.getProductsList()
+    fun getProductsList(): ResponseEntity<List<Product>> {
+        return ResponseEntity.ok(productService.getProductsList())
+        //return productService.getProductsList()
     }
 
     @GetMapping("/products/{id}")
-    fun getProductById(@PathVariable id: Int): Product {
-        return productService.getProductById(id)
+    fun getProductById(@PathVariable id: Int): ResponseEntity<Product> {
+        val product = productService.getProductById(id)
+
+        if (product.id >= 1) {
+            return ResponseEntity.ok(product)
+        } else {
+            return ResponseEntity.notFound().build()
+        }
+
+        //return ResponseEntity.ok(productService.getProductById(id))
+        //return productService.getProductById(id)
     }
 
     @PostMapping("/products")
