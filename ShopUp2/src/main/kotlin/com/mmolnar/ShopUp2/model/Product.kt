@@ -5,6 +5,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.Lob
 import org.springframework.stereotype.Component
 import java.math.BigDecimal
 import java.util.Date
@@ -21,8 +22,13 @@ data class Product(
     val brand: String? = null,
     val price: Double = 0.0,
     val category: String? = null,
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+
     val releaseDate: Date? = null,
-    val available: Boolean = false,
-    val quantity: Int = 0,
+    val productAvailable: Boolean = false,
+    val stockQuantity: Int = 0,
+
+    var imageName: String? = null,
+    var imageType: String = "",
+    @Lob
+    var imageData: ByteArray? = null
 )
