@@ -107,7 +107,7 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
       <header>
         <nav className="navbar navbar-expand-lg fixed-top">
           <div className="container-fluid">
-            <a className="navbar-brand" href="https://www.bme.hu/">
+            <a className="navbar-brand" href="/">
               ShopUp
             </a>
             <button

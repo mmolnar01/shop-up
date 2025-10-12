@@ -28,7 +28,6 @@ class ProductController {
     @GetMapping("/products")
     fun getProductsList(): ResponseEntity<List<Product>> {
         return ResponseEntity.ok(productService.getProductsList())
-        //return productService.getProductsList()
     }
 
     @GetMapping("/product/{id}")
@@ -40,9 +39,6 @@ class ProductController {
         } else {
             return ResponseEntity.notFound().build()
         }
-
-        //return ResponseEntity.ok(productService.getProductById(id))
-        //return productService.getProductById(id)
     }
 
     @GetMapping("/product/{id}/image")
