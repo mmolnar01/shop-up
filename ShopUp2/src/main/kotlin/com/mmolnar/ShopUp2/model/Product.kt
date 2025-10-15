@@ -6,12 +6,14 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Lob
+import jakarta.persistence.Table
 import org.springframework.stereotype.Component
 import java.math.BigDecimal
 import java.util.Date
 
 @Component
 @Entity
+@Table(name = "products")
 data class Product(
 
     @Id

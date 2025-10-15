@@ -16,6 +16,7 @@ const Home = ({ selectedCategory }) => {
     }
   }, [refreshData, isDataFetched]);
 
+  
   useEffect(() => {
     if (data && data.length > 0) {
       const fetchImagesAndUpdateProducts = async () => {
