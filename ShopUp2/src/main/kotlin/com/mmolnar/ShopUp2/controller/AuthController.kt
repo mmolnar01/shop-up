@@ -15,5 +15,5 @@ class AuthController {
     private final lateinit var userService: UserService
     private final lateinit var passwordEncoder : PasswordEncoder
 
-    
+
 }
