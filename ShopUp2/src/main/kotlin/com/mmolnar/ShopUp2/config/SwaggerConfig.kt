@@ -23,5 +23,7 @@ class SwaggerConfig {
             .info(Info().title(applicationName))
     }
 
-    final val BASIC_AUTH_SECURITY_SCHEME = "basicAuth"
+    companion object {
+        const val BASIC_AUTH_SECURITY_SCHEME = "basicAuth"
+    }
 }

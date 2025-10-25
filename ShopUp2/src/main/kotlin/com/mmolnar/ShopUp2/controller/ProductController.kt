@@ -1,7 +1,10 @@
 package com.mmolnar.ShopUp2.controller
 
+import com.mmolnar.ShopUp2.config.SwaggerConfig.Companion.BASIC_AUTH_SECURITY_SCHEME
 import com.mmolnar.ShopUp2.model.Product
 import com.mmolnar.ShopUp2.service.ProductService
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -25,11 +28,13 @@ class ProductController {
     @Autowired
     lateinit var productService: ProductService
 
+    @Operation(security = [SecurityRequirement(name = BASIC_AUTH_SECURITY_SCHEME)])
     @GetMapping("/products")
     fun getProductsList(): ResponseEntity<List<Product>> {
         return ResponseEntity.ok(productService.getProductsList())
     }
 
+    @Operation(security = [SecurityRequirement(name = BASIC_AUTH_SECURITY_SCHEME)])
     @GetMapping("/product/{id}")
     fun getProductById(@PathVariable id: Int): ResponseEntity<Product> {
         val product = productService.getProductById(id)
@@ -41,6 +46,7 @@ class ProductController {
         }
     }
 
+    @Operation(security = [SecurityRequirement(name = BASIC_AUTH_SECURITY_SCHEME)])
     @GetMapping("/product/{id}/image")
     fun getImageByProductId(@PathVariable id: Int): ResponseEntity<ByteArray> {
         val product = productService.getProductById(id)
@@ -49,6 +55,7 @@ class ProductController {
         return ResponseEntity.ok().contentType(MediaType.valueOf(product.imageType)).body(imageFile)
     }
 
+    @Operation(security = [SecurityRequirement(name = BASIC_AUTH_SECURITY_SCHEME)])
     @PostMapping("/product")
     fun addProduct(@RequestPart product: Product, @RequestPart imageFile: MultipartFile): ResponseEntity<Product> {
         try {
@@ -60,6 +67,7 @@ class ProductController {
 
     }
 
+    @Operation(security = [SecurityRequirement(name = BASIC_AUTH_SECURITY_SCHEME)])
     @PutMapping("/product/{id}")
     fun updateProduct(@PathVariable id: Int, @RequestPart product: Product, @RequestPart imageFile: MultipartFile): ResponseEntity<String> {
         val updatedProduct = productService.updateProduct(id, product, imageFile)
@@ -71,6 +79,7 @@ class ProductController {
         }
     }
 
+    @Operation(security = [SecurityRequirement(name = BASIC_AUTH_SECURITY_SCHEME)])
     @DeleteMapping("/product/{id}")
     fun deleteProductById(@PathVariable id: Int): ResponseEntity<String> {
         val product = productService.getProductById(id)
@@ -82,6 +91,7 @@ class ProductController {
         }
     }
 
+    @Operation(security = [SecurityRequirement(name = BASIC_AUTH_SECURITY_SCHEME)])
     @GetMapping("/products/search")
     fun searchProducts(@RequestParam keyword: String): ResponseEntity<List<Product>> {
         val products = productService.searchProducts(keyword)
