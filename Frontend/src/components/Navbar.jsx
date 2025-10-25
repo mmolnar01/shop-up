@@ -3,8 +3,28 @@ import Home from "./Home"
 import axios from "axios";
 // import { json } from "react-router-dom";
 // import { BiSunFill, BiMoon } from "react-icons/bi";
+import { useAuth } from '../Context/AuthContext'
 
 const Navbar = ({ onSelectCategory, onSearch }) => {
+  const { getUser, userIsAuthenticated, userLogout } = useAuth()
+
+  const logout = () => {
+    userLogout()
+  }
+
+  const enterMenuStyle = () => {
+    return userIsAuthenticated() ? { "display": "none" } : { "display": "block" }
+  }
+
+  const logoutMenuStyle = () => {
+    return userIsAuthenticated() ? { "display": "block" } : { "display": "none" }
+  }
+
+  const getUserName = () => {
+    const user = getUser()
+    return user ? user.name : ''
+  }
+
   const getInitialTheme = () => {
     const storedTheme = localStorage.getItem("theme");
     return storedTheme ? storedTheme : "light-theme";
@@ -162,8 +182,44 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
                   </ul>
                 </li>
 
+                <li className="nav-item">
+                  <a
+                  className="nav-link"
+                  href="/login"
+                  style={enterMenuStyle()}>
+                    Login
+                  </a>
+                </li>
+
+                <li className="nav-item">
+                  <a
+                  className="nav-link"
+                  href="/signup"
+                  style={enterMenuStyle()}>
+                    Sign Up
+                  </a>
+                </li>
+
+                <li className="nav-item">
+                  <a
+                  className="nav-link"
+                  style={logoutMenuStyle()}>
+                    {`Hi ${getUserName()}`}
+                  </a>
+                </li>
+
+                <li className="nav-item">
+                  <a
+                  className="nav-link"
+                  href="/"
+                  style={logoutMenuStyle()}>
+                    Log Out
+                  </a>
+                </li>
+
                 <li className="nav-item"></li>
               </ul>
+
               <button className="theme-btn" onClick={() => toggleTheme()}>
                 {theme === "dark-theme" ? (
                   <i className="bi bi-moon-fill"></i>

@@ -11,6 +11,7 @@ import UpdateProduct from "./components/UpdateProduct";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { AuthProvider } from "./Context/AuthContext";
 
 
 function App() {
@@ -37,7 +38,8 @@ function App() {
   };
 
   return (
-    <AppProvider>
+    <AuthProvider>
+        <AppProvider>
       <BrowserRouter>
         <Navbar onSelectCategory={handleCategorySelect}
          />
@@ -57,6 +59,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </AppProvider>
+    </AuthProvider>
   );
 }
 

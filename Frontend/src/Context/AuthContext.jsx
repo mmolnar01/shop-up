@@ -3,18 +3,18 @@ import React, { createContext, useContext, useState, useEffect } from 'react'
 const AuthContext = createContext()
 
 function AuthProvider({ children }) {
-    const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null)
 
-    useEffect(() => {
-        const storedUser = JSON.parse(localStorage.getItem('user'))
-        setUser(storedUser)
-    }, [])
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'))
+    setUser(storedUser)
+  }, [])
 
-    const getUser = () => {
-        return JSON.parse(localStorage.getItem('user'))
-    }
+  const getUser = () => {
+    return JSON.parse(localStorage.getItem('user'))
+  }
 
-    const userIsAuthenticated = () => {
+  const userIsAuthenticated = () => {
     return localStorage.getItem('user') !== null
   }
 
@@ -46,7 +46,7 @@ function AuthProvider({ children }) {
 export default AuthContext
 
 export function useAuth() {
-    return useContext(AuthContext)
+  return useContext(AuthContext)
 }
 
 export { AuthProvider }
