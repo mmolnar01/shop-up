@@ -2,6 +2,7 @@ package com.mmolnar.ShopUp2.service
 
 import com.mmolnar.ShopUp2.model.User
 import com.mmolnar.ShopUp2.repository.UserRepository
+import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -13,6 +14,7 @@ class UserService {
 
     @Autowired
     private lateinit var userRepository: UserRepository
+    @Autowired
     private lateinit var passwordEncoder: PasswordEncoder
 
     fun getUsers(): List<User> {
@@ -36,6 +38,7 @@ class UserService {
     }
 
     fun saveUser(user: User): User {
+        println(user)
         return userRepository.save(user)
     }
 

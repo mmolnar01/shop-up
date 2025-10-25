@@ -12,16 +12,20 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import jakarta.validation.Valid
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 
-@RequiredArgsConstructor
 @RestController
+@CrossOrigin
 @RequestMapping("/auth")
 class AuthController {
+    @Autowired
     private final lateinit var userService: UserService
+    @Autowired
     private final lateinit var passwordEncoder : PasswordEncoder
 
 
