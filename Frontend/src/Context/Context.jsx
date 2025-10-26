@@ -43,7 +43,6 @@ const AppProvider = ({ children }) => {
   };
 
   const refreshData = async () => {
-    const user = getUser()
     try {
       const response = await axios.get("/products");
       setData(response.data);
