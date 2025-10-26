@@ -22,7 +22,6 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
 
   const getUserName = () => {
     const user = getUser()
-    console.log(user)
     return user ? user.name : ''
   }
 

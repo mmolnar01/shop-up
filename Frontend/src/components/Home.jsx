@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import AppContext from "../Context/Context";
 import unplugged from "../assets/unplugged.png"
+import { useAuth } from '../Context/AuthContext'
 
 const Home = ({ selectedCategory }) => {
   const { data, isError, addToCart, refreshData } = useContext(AppContext);
   const [products, setProducts] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
+  const { getUser } = useAuth()
+  const user = getUser()
 
   useEffect(() => {
     if (!isDataFetched) {
@@ -25,7 +28,7 @@ const Home = ({ selectedCategory }) => {
             try {
               const response = await axios.get(
                 `http://localhost:8080/api/product/${product.id}/image`,
-                { responseType: "blob" }
+                { responseType: "blob", headers: { 'Authorization': `Basic ${user.authdata}`} }
               );
               const imageUrl = URL.createObjectURL(response.data);
               return { ...product, imageUrl };
@@ -153,7 +156,7 @@ const Home = ({ selectedCategory }) => {
                         className="card-text"
                         style={{ fontWeight: "600", fontSize: "1.1rem",marginBottom:'5px' }}
                       >
-                        <i class="bi bi-currency-doller"></i>
+                        <i className="bi bi-currency-doller"></i>
                         {price}
                       </h5>
                     </div>

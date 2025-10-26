@@ -1,4 +1,7 @@
 package com.mmolnar.ShopUp2.dto
 
-class AuthResponse(id: Int, name: String, role: String) {
-}
+data class AuthResponse(
+    val id: Int,
+    val name: String,
+    val role: String
+)

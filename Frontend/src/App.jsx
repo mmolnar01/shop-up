@@ -12,8 +12,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthProvider } from "./Context/AuthContext";
-//import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
+import Login from './components/auth/Login';
 
 
 function App() {
@@ -59,6 +59,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/update/:id" element={<UpdateProduct />} />
           <Route path='/signup' element={<Signup />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </BrowserRouter>
     </AppProvider>

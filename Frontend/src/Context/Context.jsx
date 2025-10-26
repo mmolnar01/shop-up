@@ -12,11 +12,10 @@ const AppContext = createContext({
   
 });
 
-export const AppProvider = ({ children }) => {
+const AppProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [isError, setIsError] = useState("");
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
-
 
   const addToCart = (product) => {
     const existingProductIndex = cart.findIndex((item) => item.id === product.id);
@@ -44,6 +43,7 @@ export const AppProvider = ({ children }) => {
   };
 
   const refreshData = async () => {
+    const user = getUser()
     try {
       const response = await axios.get("/products");
       setData(response.data);
@@ -72,3 +72,4 @@ export const AppProvider = ({ children }) => {
 };
 
 export default AppContext;
+export { AppProvider }

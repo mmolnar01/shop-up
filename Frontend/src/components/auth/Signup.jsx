@@ -73,75 +73,75 @@ function Signup() {
     }
 
     return (
-    <div className="container">
-    <div className="center-container">
-      <form className="row g-3 pt-5" onSubmit={handleSubmit}>
-        <div className="col-12">
-          <label className="form-label">
-            <h6>Username</h6>
-          </label>
-          <input
-            className="form-control"
-            placeholder="Type your username"
-            onChange={handleInputChange}
-            value={username}
-            name="username"
-          />
-        </div>
-        <div className="col-12">
-          <label className="form-label">
-            <h6>Password</h6>
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Type your password"
-            value={password}
-            name="password"
-            onChange={handleInputChange}
-            id="password"
-          />
-        </div>
-        <div className="col-12">
-          <label className="form-label">
-            <h6>Name</h6>
-          </label>
-          <input
-            className="form-control"
-            placeholder="Type your name"
-            onChange={handleInputChange}
-            value={name}
-            name="name"
-            id="name"
-          />
-        </div>
+        <div className="container">
+            <div className="center-container">
+                <form className="row g-3 pt-5" onSubmit={handleSubmit}>
+                    <div className="col-12">
+                        <label className="form-label">
+                            <h6>Username</h6>
+                        </label>
+                        <input
+                            className="form-control"
+                            placeholder="Type your username"
+                            onChange={handleInputChange}
+                            value={username}
+                            name="username"
+                        />
+                    </div>
+                    <div className="col-12">
+                        <label className="form-label">
+                            <h6>Password</h6>
+                        </label>
+                        <input
+                            type="password"
+                            className="form-control"
+                            placeholder="Type your password"
+                            value={password}
+                            name="password"
+                            onChange={handleInputChange}
+                            id="password"
+                        />
+                    </div>
+                    <div className="col-12">
+                        <label className="form-label">
+                            <h6>Name</h6>
+                        </label>
+                        <input
+                            className="form-control"
+                            placeholder="Type your name"
+                            onChange={handleInputChange}
+                            value={name}
+                            name="name"
+                            id="name"
+                        />
+                    </div>
 
-        <div className="col-12">
-          <label className="form-label">
-            <h6>Email</h6>
-          </label>
-          <input
-            className="form-control"
-            placeholder="Type your email"
-            onChange={handleInputChange}
-            value={email}
-            name="email"
-            // value={`${stockAlert}/${stockQuantity}`}
-            id="email"
-          />
+                    <div className="col-12">
+                        <label className="form-label">
+                            <h6>Email</h6>
+                        </label>
+                        <input
+                            className="form-control"
+                            placeholder="Type your email"
+                            onChange={handleInputChange}
+                            value={email}
+                            name="email"
+                            // value={`${stockAlert}/${stockQuantity}`}
+                            id="email"
+                        />
+                    </div>
+                    <div className="col-12">
+                        <button
+                            type="submit"
+                            className="btn btn-primary"
+                        >
+                            Sign Up
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div className="col-12">
-          <button
-            type="submit"
-            className="btn btn-primary"
-          >
-            Sign Up
-          </button>
-        </div>
-      </form>
-    </div>
-    </div>
-  );
+    );
 }
 
 export default Signup
