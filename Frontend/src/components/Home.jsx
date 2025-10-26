@@ -28,7 +28,7 @@ const Home = ({ selectedCategory }) => {
             try {
               const response = await axios.get(
                 `http://localhost:8080/api/product/${product.id}/image`,
-                { responseType: "blob", headers: { 'Authorization': `Basic ${user.authdata}`} }
+                { responseType: "blob" }
               );
               const imageUrl = URL.createObjectURL(response.data);
               return { ...product, imageUrl };
