@@ -28,7 +28,7 @@ const Home = ({ selectedCategory }) => {
             try {
               const response = await axios.get(
                 `http://localhost:8080/api/product/${product.id}/image`,
-                { responseType: "blob" }
+                { responseType: "blob", headers: {'Authorization': basicAuth(user)} }
               );
               const imageUrl = URL.createObjectURL(response.data);
               return { ...product, imageUrl };
@@ -181,5 +181,9 @@ const Home = ({ selectedCategory }) => {
     </>
   );
 };
+
+function basicAuth(user) {
+  return `Basic ${user.authdata}`
+}
 
 export default Home;

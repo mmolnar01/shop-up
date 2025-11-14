@@ -1,5 +1,8 @@
 import axios from "../axios";
 import { useState, useEffect, createContext } from "react";
+import { useAuth } from '../Context/AuthContext'
+import { productApi } from "../components/api/ProductApi"
+
 
 const AppContext = createContext({
   data: [],
@@ -16,6 +19,12 @@ const AppProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [isError, setIsError] = useState("");
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+  //const { getUser } = useAuth()
+  //const user = getUser()
+  //const user = JSON.parse(localStorage.getItem('user'));
+  const auth = useAuth()
+  const user = auth && typeof auth.getUser === "function" ? auth.getUser() : null;
+
 
   const addToCart = (product) => {
     const existingProductIndex = cart.findIndex((item) => item.id === product.id);
@@ -44,7 +53,9 @@ const AppProvider = ({ children }) => {
 
   const refreshData = async () => {
     try {
-      const response = await axios.get("/products");
+      //const response = await axios.get("http://localhost:8080/api/products", { headers: {'Authorization': basicAuth(user)}});
+      const response = await productApi.getProducts(user);
+      //const response = await axios.get("http://localhost:8080/api/products");
       setData(response.data);
     } catch (error) {
       setIsError(error.message);
@@ -69,6 +80,10 @@ const AppProvider = ({ children }) => {
     </AppContext.Provider>
   );
 };
+
+function basicAuth(user) {
+  return `Basic ${user.authdata}`
+}
 
 export default AppContext;
 export { AppProvider }

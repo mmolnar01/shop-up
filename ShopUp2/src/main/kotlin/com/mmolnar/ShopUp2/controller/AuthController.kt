@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 
 @RestController
-@CrossOrigin
 @RequestMapping("/auth")
 class AuthController {
     @Autowired

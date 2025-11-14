@@ -12,6 +12,7 @@ export const productApi = {
   updateProduct,
   deleteProduct,
   addProduct*/
+  getProducts
 }
 
 function authenticate(username, password) {
@@ -23,6 +24,12 @@ function authenticate(username, password) {
 function signup(user) {
   return instance.post('/auth/signup', user, {
     headers: { 'Content-type': 'application/json' }
+  })
+}
+
+function getProducts(user) {
+  return instance.get('api/products', {
+    headers: { 'Authorization': basicAuth(user) }
   })
 }
 

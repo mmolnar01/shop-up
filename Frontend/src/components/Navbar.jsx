@@ -4,9 +4,11 @@ import axios from "axios";
 // import { json } from "react-router-dom";
 // import { BiSunFill, BiMoon } from "react-icons/bi";
 import { useAuth } from '../Context/AuthContext'
+import { productApi } from "./api/ProductApi"
 
 const Navbar = ({ onSelectCategory, onSearch }) => {
   const { getUser, userIsAuthenticated, userLogout } = useAuth()
+  const user = getUser()
 
   const logout = () => {
     userLogout()
@@ -42,7 +44,9 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
 
   const fetchData = async (value) => {
     try {
-      const response = await axios.get("http://localhost:8080/api/products");
+      //const response = await axios.get("http://localhost:8080/api/products", { timeout: 1000, headers: { 'Authorization': basicAuth(user) } });
+      const response = await productApi.getProducts(user)
+      //const response = await axios.get("http://localhost:8080/api/products");
       setSearchResults(response.data);
       console.log(response.data);
     } catch (error) {
@@ -283,5 +287,9 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
     </>
   );
 };
+
+function basicAuth(user) {
+  return `Basic ${user.authdata}`
+}
 
 export default Navbar;

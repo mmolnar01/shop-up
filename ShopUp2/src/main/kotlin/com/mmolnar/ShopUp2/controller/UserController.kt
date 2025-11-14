@@ -1,6 +1,7 @@
 package com.mmolnar.ShopUp2.controller
 
 import com.mmolnar.ShopUp2.config.SwaggerConfig.Companion.BASIC_AUTH_SECURITY_SCHEME
+import com.mmolnar.ShopUp2.dto.UserDto
 import com.mmolnar.ShopUp2.model.User
 import com.mmolnar.ShopUp2.security.CustomUserDetails
 import com.mmolnar.ShopUp2.service.ProductService
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/users")
 class UserController {
 
@@ -28,8 +28,9 @@ class UserController {
 
     @Operation(security = [SecurityRequirement(name = BASIC_AUTH_SECURITY_SCHEME)])
     @GetMapping("/me")
-    fun getCurrentUser(@AuthenticationPrincipal currentUser: CustomUserDetails): User {
-        return userService.validateAndGetUserByUsername(currentUser.username)
+    fun getCurrentUser(@AuthenticationPrincipal currentUser: CustomUserDetails): UserDto {
+        return UserDto.from(userService.validateAndGetUserByUsername(currentUser.username))
+        //return userService.validateAndGetUserByUsername(currentUser.username)
     }
 
     @Operation(security = [SecurityRequirement(name = BASIC_AUTH_SECURITY_SCHEME)])
