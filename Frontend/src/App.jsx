@@ -41,28 +41,28 @@ function App() {
 
   return (
     <AuthProvider>
-        <AppProvider>
-      <BrowserRouter>
-        <Navbar onSelectCategory={handleCategorySelect}
-         />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home addToCart={addToCart} selectedCategory={selectedCategory}
-              />
-            }
+      <AppProvider>
+        <BrowserRouter>
+          <Navbar onSelectCategory={handleCategorySelect}
           />
-          <Route path="/add_product" element={<AddProduct />} />
-          <Route path="/product" element={<Product  />} />
-          <Route path="product/:id" element={<Product  />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/product/update/:id" element={<UpdateProduct />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/login' element={<Login />} />
-        </Routes>
-      </BrowserRouter>
-    </AppProvider>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home addToCart={addToCart} selectedCategory={selectedCategory}
+                />
+              }
+            />
+            <Route path="/add_product" element={<AddProduct />} />
+            <Route path="/product" element={<Product />} />
+            <Route path="product/:id" element={<Product />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/product/update/:id" element={<UpdateProduct />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/login' element={<Login />} />
+          </Routes>
+        </BrowserRouter>
+      </AppProvider>
     </AuthProvider>
   );
 }
