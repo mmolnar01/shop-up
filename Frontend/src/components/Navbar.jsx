@@ -37,7 +37,7 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [noResults, setNoResults] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
-  const [showSearchResults,setShowSearchResults] = useState(false)
+  const [showSearchResults, setShowSearchResults] = useState(false)
   useEffect(() => {
     fetchData();
   }, []);
@@ -58,16 +58,17 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
     setInput(value);
     if (value.length >= 1) {
       setShowSearchResults(true)
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/api/products/search?keyword=${value}`
-      );
-      setSearchResults(response.data);
-      setNoResults(response.data.length === 0);
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error searching:", error);
-    }
+      try {
+        /*const response = await axios.get(
+          `http://localhost:8080/api/products/search?keyword=${value}`
+        );*/
+        const response = await productApi.searchProducts(user, value);
+        setSearchResults(response.data);
+        setNoResults(response.data.length === 0);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error searching:", error);
+      }
     } else {
       setShowSearchResults(false);
       setSearchResults([]);
@@ -75,7 +76,7 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
     }
   };
 
-  
+
   // const handleChange = async (value) => {
   //   setInput(value);
   //   if (value.length >= 1) {
@@ -127,8 +128,7 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
     "Fashion",
   ];
   return (
-    <>
-      <header>
+    <header>
         <nav className="navbar navbar-expand-lg fixed-top">
           <div className="container-fluid">
             <a className="navbar-brand" href="/">
@@ -185,7 +185,9 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
                     ))}
                   </ul>
                 </li>
-
+                <li className="nav-item"></li>
+              </ul>
+              <ul className="navbar-nav me-right mb-2 mb-lg-0">
                 <li className="nav-item">
                   <a
                   className="nav-link"
@@ -203,26 +205,24 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
                     Sign Up
                   </a>
                 </li>
-
+                
                 <li className="nav-item">
                   <a
-                  className="nav-link"
-                  style={logoutMenuStyle()}>
+                    className="nav-link"
+                    style={logoutMenuStyle()}>
                     {`Hi ${getUserName()}`}
                   </a>
                 </li>
 
                 <li className="nav-item">
                   <a
-                  className="nav-link"
-                  href="/"
-                  style={logoutMenuStyle()}
-                  onClick={logout}>
+                    className="nav-link"
+                    href="/"
+                    style={logoutMenuStyle()}
+                    onClick={logout}>
                     Log Out
                   </a>
                 </li>
-
-                <li className="nav-item"></li>
               </ul>
 
               <button className="theme-btn" onClick={() => toggleTheme()}>
@@ -254,14 +254,14 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
                 />
                 {showSearchResults && (
                   <ul className="list-group">
-                    {searchResults.length > 0 ? (  
-                        searchResults.map((result) => (
-                          <li key={result.id} className="list-group-item">
-                            <a href={`/product/${result.id}`} className="search-result-link">
+                    {searchResults.length > 0 ? (
+                      searchResults.map((result) => (
+                        <li key={result.id} className="list-group-item">
+                          <a href={`/product/${result.id}`} className="search-result-link">
                             <span>{result.name}</span>
-                            </a>
-                          </li>
-                        ))
+                          </a>
+                        </li>
+                      ))
                     ) : (
                       noResults && (
                         <p className="no-results-message">
@@ -284,12 +284,7 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
           </div>
         </nav>
       </header>
-    </>
   );
 };
-
-function basicAuth(user) {
-  return `Basic ${user.authdata}`
-}
 
 export default Navbar;

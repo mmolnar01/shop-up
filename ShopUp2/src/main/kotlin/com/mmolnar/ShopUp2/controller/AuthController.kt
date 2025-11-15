@@ -6,7 +6,6 @@ import com.mmolnar.ShopUp2.dto.LoginRequest
 import com.mmolnar.ShopUp2.dto.SignUpRequest
 import com.mmolnar.ShopUp2.model.User
 import com.mmolnar.ShopUp2.service.UserService
-import lombok.RequiredArgsConstructor
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -15,7 +14,6 @@ import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 

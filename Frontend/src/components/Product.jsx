@@ -4,6 +4,9 @@ import { useState } from "react";
 import AppContext from "../Context/Context";
 import axios from "../axios";
 import UpdateProduct from "./UpdateProduct";
+import { useAuth } from '../Context/AuthContext'
+import { productApi } from "./api/ProductApi"
+
 const Product = () => {
   const { id } = useParams();
   const { data, addToCart, removeFromCart, cart, refreshData } =
@@ -11,13 +14,16 @@ const Product = () => {
   const [product, setProduct] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
+  const { getUser } = useAuth()
+  const user = getUser()
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(
+        /*const response = await axios.get(
           `http://localhost:8080/api/product/${id}`
-        );
+        );*/
+        const response = await productApi.getProduct(user, id);
         setProduct(response.data);
         if (response.data.imageName) {
           fetchImage();
@@ -28,10 +34,11 @@ const Product = () => {
     };
 
     const fetchImage = async () => {
-      const response = await axios.get(
+      /*const response = await axios.get(
         `http://localhost:8080/api/product/${id}/image`,
         { responseType: "blob" }
-      );
+      );*/
+      const response = await productApi.getImage(user, id);
       setImageUrl(URL.createObjectURL(response.data));
     };
 
@@ -40,7 +47,8 @@ const Product = () => {
 
   const deleteProduct = async () => {
     try {
-      await axios.delete(`http://localhost:8080/api/product/${id}`);
+      //await axios.delete(`http://localhost:8080/api/product/${id}`);
+      await productApi.deleteProduct(user, id);
       removeFromCart(id);
       console.log("Product deleted successfully");
       alert("Product deleted successfully");

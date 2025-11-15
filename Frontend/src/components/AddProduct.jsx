@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useAuth } from '../Context/AuthContext'
+import { productApi } from "./api/ProductApi"
 
 const AddProduct = () => {
   const [product, setProduct] = useState({
@@ -13,6 +15,8 @@ const AddProduct = () => {
     productAvailable: false,
   });
   const [image, setImage] = useState(null);
+  const { getUser } = useAuth()
+  const user = getUser()
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,7 +37,17 @@ const AddProduct = () => {
       new Blob([JSON.stringify(product)], { type: "application/json" })
     );
 
-    axios
+    productApi.addProduct(user, formData)
+      .then((response) => {
+        console.log("Product added successfully:", response.data);
+        alert("Product added successfully");
+      })
+      .catch((error) => {
+        console.error("Error adding product:", error);
+        alert("Error adding product");
+      });
+
+    /*axios
       .post("http://localhost:8080/api/product", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -46,7 +60,7 @@ const AddProduct = () => {
       .catch((error) => {
         console.error("Error adding product:", error);
         alert("Error adding product");
-      });
+      });*/
   };
 
   return (

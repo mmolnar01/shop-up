@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int = 0,
-    val username: String = "",
-    val email: String = "",
-    val password: String = "",
-    val name: String = "",
-    val role: String = "",
+    var id: Int? = 0,
+    var username: String = "",
+    var email: String = "",
+    var password: String = "",
+    var name: String = "",
+    var role: String = "",
 )

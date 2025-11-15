@@ -4,6 +4,7 @@ import axios from "axios";
 import AppContext from "../Context/Context";
 import unplugged from "../assets/unplugged.png"
 import { useAuth } from '../Context/AuthContext'
+import { productApi } from "./api/ProductApi"
 
 const Home = ({ selectedCategory }) => {
   const { data, isError, addToCart, refreshData } = useContext(AppContext);
@@ -26,10 +27,11 @@ const Home = ({ selectedCategory }) => {
         const updatedProducts = await Promise.all(
           data.map(async (product) => {
             try {
-              const response = await axios.get(
+              /*const response = await axios.get(
                 `http://localhost:8080/api/product/${product.id}/image`,
                 { responseType: "blob", headers: {'Authorization': basicAuth(user)} }
-              );
+              );*/
+              const response = await productApi.getImage(user, product.id);
               const imageUrl = URL.createObjectURL(response.data);
               return { ...product, imageUrl };
             } catch (error) {
@@ -156,7 +158,7 @@ const Home = ({ selectedCategory }) => {
                         className="card-text"
                         style={{ fontWeight: "600", fontSize: "1.1rem",marginBottom:'5px' }}
                       >
-                        <i className="bi bi-currency-doller"></i>
+                        <i className="bi bi-currency-dollar"></i>
                         {price}
                       </h5>
                     </div>
