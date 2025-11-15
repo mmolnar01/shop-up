@@ -67,10 +67,11 @@ const Home = ({ selectedCategory }) => {
         className="grid"
         style={{
           marginTop: "64px",
-          display: "grid",
+          display: "flex",
           gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-          gap: "20px",
-          padding: "20px",
+          gap: "100px",
+          padding: "50px",
+          justifyContent: "flex-start"
         }}
       >
         {filteredProducts.length === 0 ? (
@@ -86,7 +87,7 @@ const Home = ({ selectedCategory }) => {
           </h2>
         ) : (
           filteredProducts.map((product) => {
-            const { id, brand, name, price, productAvailable, imageUrl } =
+            const { id, brand, name, price, productAvailable, imageUrl, stockQuantity } =
               product;
             const cardStyle = {
               width: "18rem",
@@ -107,7 +108,7 @@ const Home = ({ selectedCategory }) => {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent:'flex-start',
-                  alignItems:'stretch'
+                  alignItems:'stretch',
                 }}
                 key={id}
               >
@@ -148,7 +149,7 @@ const Home = ({ selectedCategory }) => {
                         className="card-brand"
                         style={{ fontStyle: "italic", fontSize: "0.8rem" }}
                       >
-                        {"~ " + brand}
+                        {" " + brand}
                       </i>
                     </div>
                     <hr className="hr-line" style={{ margin: "10px 0" }} />
@@ -168,9 +169,9 @@ const Home = ({ selectedCategory }) => {
                         e.preventDefault();
                         addToCart(product);
                       }}
-                      disabled={!productAvailable}
+                      disabled={!productAvailable || stockQuantity < 1}
                     >
-                      {productAvailable ? "Add to Cart" : "Out of Stock"}
+                      {productAvailable && stockQuantity > 0 ? "Add to Cart" : "Out of Stock"}
                     </button> 
                   </div>
                 </Link>

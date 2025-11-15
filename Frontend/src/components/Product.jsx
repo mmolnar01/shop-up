@@ -116,10 +116,10 @@ const Product = () => {
             </span>
             <button
               className={`cart-btn ${
-                !product.productAvailable ? "disabled-btn" : ""
+                !product.productAvailable || product.stockQuantity < 1 ? "disabled-btn" : ""
               }`}
               onClick={handlAddToCart}
-              disabled={!product.productAvailable}
+              disabled={!product.productAvailable || product.stockQuantity < 1}
               style={{
                 padding: "1rem 2rem",
                 fontSize: "1rem",
@@ -131,7 +131,7 @@ const Product = () => {
                 marginBottom: "1rem",
               }}
             >
-              {product.productAvailable ? "Add to cart" : "Out of Stock"}
+              {product.productAvailable && product.stockQuantity > 0 ? "Add to cart" : "Out of Stock"}
             </button>
             <h6 style={{ marginBottom: "1rem" }}>
               Stock Available :{" "}
