@@ -17,7 +17,8 @@ export const productApi = {
   searchProducts,
   getImage,
   deleteProduct,
-  addProduct
+  addProduct,
+  updateProduct
 }
 
 function authenticate(username, password) {
@@ -58,11 +59,20 @@ function deleteProduct(user, id) {
 
 function addProduct(user, formData) {
   return instance.post("api/product", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          'Authorization': basicAuth(user)
-        },
-      })
+    headers: {
+      "Content-Type": "multipart/form-data",
+      'Authorization': basicAuth(user)
+    },
+  })
+}
+
+function updateProduct(user, id, updatedProduct) {
+  return instance.put(`api/product/${id}`, updatedProduct, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      'Authorization': basicAuth(user)
+    },
+  })
 }
 
 function getImage(user, productId) {

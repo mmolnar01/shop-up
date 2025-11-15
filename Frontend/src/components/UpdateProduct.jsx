@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from '../Context/AuthContext'
+import { productApi } from "./api/ProductApi"
 
 const UpdateProduct = () => {
   const { id } = useParams();
@@ -17,21 +19,26 @@ const UpdateProduct = () => {
     productAvailable: false,
     stockQuantity: "",
   });
+  const { getUser } = useAuth();
+  const user = getUser();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(
+        /*const response = await axios.get(
           `http://localhost:8080/api/product/${id}`
-        );
+        );*/
+        const response = await productApi.getProduct(user, id);
 
         setProduct(response.data);
       
-        const responseImage = await axios.get(
+        /*const responseImage = await axios.get(
           `http://localhost:8080/api/product/${id}/image`,
           { responseType: "blob" }
-        );
-       const imageFile = await converUrlToFile(responseImage.data,response.data.imageName)
+        );*/
+        const responseImage = await productApi.getImage(user, id);
+        const imageFile = await converUrlToFile(responseImage.data,response.data.imageName)
         setImage(imageFile);     
         setUpdateProduct(response.data);
       } catch (error) {
@@ -66,7 +73,7 @@ const UpdateProduct = () => {
   
 
   console.log("formData : ", updatedProduct)
-    axios
+    /*axios
       .put(`http://localhost:8080/api/product/${id}`, updatedProduct, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -75,6 +82,18 @@ const UpdateProduct = () => {
       .then((response) => {
         console.log("Product updated successfully:", updatedProduct);
         alert("Product updated successfully!");
+      })
+      .catch((error) => {
+        console.error("Error updating product:", error);
+        console.log("Product update unsuccessful",updateProduct)
+        alert("Failed to update product. Please try again.");
+      });*/
+
+    productApi.updateProduct(user, id, updatedProduct)
+      .then((response) => {
+        console.log("Product updated successfully:", updatedProduct);
+        alert("Product updated successfully!");
+        navigate("/");
       })
       .catch((error) => {
         console.error("Error updating product:", error);

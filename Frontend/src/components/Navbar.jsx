@@ -22,6 +22,11 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
     return userIsAuthenticated() ? { "display": "block" } : { "display": "none" }
   }
 
+  const adminPageStyle = () => {
+    const user = getUser()
+    return user && user.role === 'ADMIN' ? { "display": "block" } : { "display": "none" }
+  }
+
   const getUserName = () => {
     const user = getUser()
     return user ? user.name : ''
@@ -156,7 +161,7 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/add_product">
+                  <a className="nav-link" href="/add_product" style={adminPageStyle()}>
                     Add Product
                   </a>
                 </li>

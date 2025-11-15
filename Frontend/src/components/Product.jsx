@@ -17,6 +17,11 @@ const Product = () => {
   const { getUser } = useAuth()
   const user = getUser()
 
+  const adminPageStyle = () => {
+    const user = getUser()
+    return user && user.role === 'ADMIN' ? { "display": "block" } : { "display": "none" }
+  }
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -75,8 +80,7 @@ const Product = () => {
     );
   }
   return (
-    <>
-      <div className="containers" style={{ display: "flex" }}>
+    <div className="containers" style={{ display: "flex" }}>
         <img
           className="left-column-img"
           src={imageUrl}
@@ -150,6 +154,7 @@ const Product = () => {
                 border: "none",
                 borderRadius: "5px",
                 cursor: "pointer",
+                ...adminPageStyle()
               }}
             >
               Update
@@ -167,6 +172,7 @@ const Product = () => {
                 border: "none",
                 borderRadius: "5px",
                 cursor: "pointer",
+                ...adminPageStyle()
               }}
             >
               Delete
@@ -174,7 +180,6 @@ const Product = () => {
           </div>
         </div>
       </div>
-    </>
   );
 };
 
