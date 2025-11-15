@@ -63,8 +63,7 @@ const Home = ({ selectedCategory }) => {
     );
   }
   return (
-    <>
-      <div
+    <div
         className="grid"
         style={{
           marginTop: "64px",
@@ -180,7 +179,6 @@ const Home = ({ selectedCategory }) => {
           })
         )}
       </div>
-    </>
   );
 };
 
