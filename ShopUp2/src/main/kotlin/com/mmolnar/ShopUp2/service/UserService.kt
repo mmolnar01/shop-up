@@ -38,7 +38,7 @@ class UserService {
     }
 
     fun saveUser(user: User): User {
-        println(user)
+        //println(user)
         return userRepository.save(user)
     }
 

@@ -32,7 +32,7 @@ class ProductController {
     @Operation(security = [SecurityRequirement(name = BASIC_AUTH_SECURITY_SCHEME)])
     @GetMapping("/products")
     fun getProductsList(@RequestHeader(HttpHeaders.AUTHORIZATION) authorization: String): ResponseEntity<List<Product>> {
-        println(authorization)
+        //println(authorization)
         return ResponseEntity.ok(productService.getProductsList())
     }
 

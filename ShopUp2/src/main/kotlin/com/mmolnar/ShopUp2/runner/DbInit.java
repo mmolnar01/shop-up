@@ -19,7 +19,7 @@ import java.util.List;
 public class DbInit implements CommandLineRunner {
 
     private final UserService userService;
-    private final ProductService bookService;
+    private final ProductService productService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -33,7 +33,7 @@ public class DbInit implements CommandLineRunner {
             userService.saveUser(user);
         });
 
-        log.info("Database initialized");
+        //log.info("Database initialized");
     }
 
     private static final List<User> USERS = Arrays.asList(

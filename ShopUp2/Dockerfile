@@ -1,5 +1,5 @@
 # the base image
-FROM amazoncorretto:17
+FROM amazoncorretto:21
 
 # the JAR file path
 ARG JAR_FILE=target/*.jar
